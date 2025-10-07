@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Gas Monitor</title>
+  <link rel="stylesheet" href="order.css" />
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ✅ Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-success" href="index.html">Order</a>
+      <div class="d-flex">
+        <a href="index.html" class="btn btn-outline-success">Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ✅ Order Section -->
+  <div class="container order-container my-5">
+    <div class="row g-4">
+      
+      <!-- 🛒 Product Preview -->
+      <div class="col-md-5">
+        <div class="card product-card shadow-sm">
+          <img src="gas_monitor_product.jpg" alt="Gas Monitor" class="card-img-top" id="productImage">
+          <div class="card-body">
+            <h4 class="card-title text-success">Smart Gas Monitoring System</h4>
+            <p class="card-text text-muted">
+              Monitor your gas levels in real-time, detect leaks instantly, and receive alerts anytime, anywhere.
+            </p>
+            <h5 class="fw-bold text-dark">₹2,499</h5>
+          </div>
+        </div>
+      </div>
+
+      <!-- 🧾 Order Form -->
+      <div class="col-md-7">
+        <div class="card shadow-sm p-4">
+          <h3 class="text-success mb-4">Place Your Order</h3>
+          <form id="orderForm">
+
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" id="name" class="form-control" placeholder="Enter your full name" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" class="form-control" placeholder="Enter your email" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="text" id="phone" class="form-control" placeholder="Enter your phone number" required />
+            </div>
+
+            <div class="mb-3">
+              <label for="address" class="form-label">Delivery Address</label>
+              <textarea id="address" class="form-control" rows="3" placeholder="Enter your delivery address" required></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="payment" class="form-label">Payment Method</label>
+              <select id="payment" class="form-select" required>
+                <option value="">Select payment option</option>
+                <option value="COD">Cash on Delivery</option>
+                <option value="UPI">UPI</option>
+              </select>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-success btn-lg">Place Order</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ✅ Success Modal -->
+  <div class="modal fade" id="orderSuccessModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center p-4">
+        <h4 class="text-success">🎉 Order Placed Successfully!</h4>
+        <p>Thank you for ordering our Smart Gas Monitoring System.</p>
+        <button class="btn btn-success" data-bs-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="order.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

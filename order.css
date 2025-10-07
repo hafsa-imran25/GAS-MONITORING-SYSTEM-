@@ -1,0 +1,44 @@
+body {
+  background-color: #fffaf3;
+  font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+  background-color: #fff;
+}
+
+.order-container {
+  margin-top: 40px;
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+}
+
+.card img {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  width: 100%;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.btn-success {
+  background-color: #4caf50;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #43a047;
+}
+
+.form-label {
+  font-weight: 600;
+}
+
+.modal-content {
+  border-radius: 15px;
+}

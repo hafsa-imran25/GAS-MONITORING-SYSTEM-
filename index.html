@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gas Monitoring System</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Login Popup -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4 rounded-4">
+      <h4 class="text-center text-success mb-3">Login</h4>
+      <form id="loginForm">
+        <div class="mb-3">
+          <label class="form-label">Email or Phone</label>
+          <input type="text" class="form-control" id="loginInput" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" id="loginPassword" required>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Login</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-success py-3 shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">
+      <i class="fa-solid fa-gas-pump"></i> Gas Monitoring System
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+
+        <li class="nav-item"><a href="how-it-works.html" class="nav-link">How it Works</a></li>
+        <li class="nav-item"><a href="user-guide.html" class="nav-link">Support</a></li>
+        <li class="nav-item"><a href="order.html" class="btn btn-light ms-2">Order Now</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero text-center text-white d-flex align-items-center justify-content-center">
+  <div class="container">
+    <h1 class="fw-bold mb-3">Monitor Your LPG Anytime, Anywhere!</h1>
+    <p class="lead mb-4">SmartGas gives you real-time gas level tracking, leak alerts, and smart monitoring directly from your phone.</p>
+    <a href="order.html" class="btn btn-light btn-lg">Order Now</a>
+  </div>
+</section>
+
+<!-- Why Choose SmartGas -->
+<section class="py-5 text-center">
+  <div class="container">
+    <h2 class="fw-bold text-success mb-4">Why Choose Gas Monitoring System?</h2>
+    <p class="text-muted mb-5">SmartGas is an innovative IoT-based product designed for every household — ensuring safety, efficiency, and convenience.</p>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="feature-box p-4 shadow rounded">
+          <i class="fa-solid fa-wifi fa-2x text-success mb-3"></i>
+          <h5>Monitor from Anywhere</h5>
+          <p class="text-muted">Track gas levels via Wi-Fi or mobile data in real-time.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-box p-4 shadow rounded">
+          <i class="fa-solid fa-bell fa-2x text-success mb-3"></i>
+          <h5>Smart Alerts</h5>
+          <p class="text-muted">Instant notifications for leaks, low gas, and cylinder status.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-box p-4 shadow rounded">
+          <i class="fa-solid fa-lock fa-2x text-success mb-3"></i>
+          <h5>Safety First</h5>
+          <p class="text-muted">Advanced sensors detect leaks and ensure full household safety.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="bg-light py-5">
+  <div class="container">
+    <h2 class="fw-bold text-center mb-4">Core Features</h2>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">📱 Monitor from anywhere (Wi-Fi / mobile data)</li>
+      <li class="list-group-item">🚨 Smart alerts for low gas levels or leakage</li>
+      <li class="list-group-item">💡 Displays gas percentage, weight, and days remaining</li>
+      <li class="list-group-item">🔋 Real-time sensor updates using IoT</li>
+      <li class="list-group-item">💯 100% original, never-before-seen household innovation</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-center py-3 bg-success text-white">
+    <!-- Download App Section -->
+<section class="download-app py-5 text-center bg-light">
+  <div class="container">
+    <h2 class="fw-bold mb-3">Get the Gas Monitoring System  App</h2>
+    <p class="mb-4">Monitor your gas levels on the go — download our mobile app now!</p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="#" class="btn btn-dark d-flex align-items-center gap-2 px-3 py-2">
+        <i class="fab fa-google-play fa-lg"></i>
+        <span>Get it on <br><strong>Google Play</strong></span>
+      </a>
+      <a href="#" class="btn btn-dark d-flex align-items-center gap-2 px-3 py-2">
+        <i class="fab fa-apple fa-lg"></i>
+        <span>Download on the <br><strong>App Store</strong></span>
+      </a>
+    </div>
+    <p class="mt-4 small">App link will be available soon.</p>
+  </div>
+</section>
+
+  <p>&copy; 2025 SmartGas. All Rights Reserved.</p>
+  <p>Download the App: <a href="#" class="text-warning">Coming Soon</a></p>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+  loginModal.show();
+});
+</script>
+</body>
+</html>
