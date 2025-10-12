@@ -1,122 +1,146 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gas Monitoring System</title>
+  <meta charset="utf-8" />
+  <title>SmartGas — Monitor LPG from Anywhere</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <!-- Bootstrap -->
+  <!-- Bootstrap & icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animations.css">
 </head>
 <body>
-
-<!-- Login Popup -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content p-4 rounded-4">
-      <h4 class="text-center text-success mb-3">Login</h4>
-      <form id="loginForm">
-        <div class="mb-3">
-          <label class="form-label">Email or Phone</label>
-          <input type="text" class="form-control" id="loginInput" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Password</label>
-          <input type="password" class="form-control" id="loginPassword" required>
-        </div>
-        <button type="submit" class="btn btn-success w-100">Login</button>
-      </form>
+  <!-- NAVBAR (same across pages) -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><i class="fa-regular fa-tank-recovery"></i> Gas Monitoring System</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="how-it-works.html">How it Works</a></li>
+          <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
+          <li class="nav-item ms-2"><a class="btn btn-order" href="order.html" target="_blank">Order Now</a></li>
+          <li class="nav-item ms-2"><a class="btn btn-login" href="login.html">Login</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</div>
+  </nav>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-success py-3 shadow-sm">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="#">
-      <i class="fa-solid fa-gas-pump"></i> Gas Monitoring System
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav ms-auto">
-
-        <li class="nav-item"><a href="how-it-works.html" class="nav-link">How it Works</a></li>
-        <li class="nav-item"><a href="user-guide.html" class="nav-link">Support</a></li>
-        <li class="nav-item"><a href="order.html" class="btn btn-light ms-2">Order Now</a></li>
-      </ul>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="inner container-card fade-in center">
+      <h1 class="mb-2">SmartGas — Protect Your Home With Real-time Gas Monitoring</h1>
+      <p class="lead">Monitor cylinder level, detect leaks, and get intelligent alerts — accessible from anywhere using mobile data or Wi-Fi.</p>
+      <div class="mt-4">
+        <a class="btn btn-primary btn-lg me-2 pulse" href="order.html" target="_blank">Order Now</a>
+        <a class="btn btn-outline-primary btn-lg" href="how-it-works.html">How it Works</a>
+      </div>
     </div>
-  </div>
-</nav>
+  </section>
 
-<!-- Hero Section -->
-<section class="hero text-center text-white d-flex align-items-center justify-content-center">
-  <div class="container">
-    <h1 class="fw-bold mb-3">Monitor Your LPG Anytime, Anywhere!</h1>
-    <p class="lead mb-4">SmartGas gives you real-time gas level tracking, leak alerts, and smart monitoring directly from your phone.</p>
-    <a href="order.html" class="btn btn-light btn-lg">Order Now</a>
-  </div>
-</section>
+ <!-- ====== Gas Monitoring Display Section ====== -->
+<section class="display-section">
+  <h2 class="section-title">Real-Time Gas Monitoring</h2>
+  <p class="section-subtitle">
+    Stay informed with live gas level updates on your device and LCD screen.
+  </p>
 
-<!-- Why Choose SmartGas -->
-<section class="py-5 text-center">
-  <div class="container">
-    <h2 class="fw-bold text-success mb-4">Why Choose Gas Monitoring System?</h2>
-    <p class="text-muted mb-5">SmartGas is an innovative IoT-based product designed for every household — ensuring safety, efficiency, and convenience.</p>
+  <div class="display-cards">
+    <div class="display-card">
+      <img src="images/lcd-display.png" alt="Local LCD Display" />
+      <h3>Local LCD Display</h3>
+      <p>View real-time gas percentage and weight directly on the local device screen.</p>
+    </div>
 
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="feature-box p-4 shadow rounded">
-          <i class="fa-solid fa-wifi fa-2x text-success mb-3"></i>
-          <h5>Monitor from Anywhere</h5>
-          <p class="text-muted">Track gas levels via Wi-Fi or mobile data in real-time.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="feature-box p-4 shadow rounded">
-          <i class="fa-solid fa-bell fa-2x text-success mb-3"></i>
-          <h5>Smart Alerts</h5>
-          <p class="text-muted">Instant notifications for leaks, low gas, and cylinder status.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="feature-box p-4 shadow rounded">
-          <i class="fa-solid fa-lock fa-2x text-success mb-3"></i>
-          <h5>Safety First</h5>
-          <p class="text-muted">Advanced sensors detect leaks and ensure full household safety.</p>
-        </div>
-      </div>
+    <div class="display-card">
+      <img src="images/mobile-view.png" alt="Mobile App View" />
+      <h3>Mobile App View</h3>
+      <p>Track gas levels remotely using the mobile application with instant updates.</p>
     </div>
   </div>
 </section>
 
-<!-- Features Section -->
-<section class="bg-light py-5">
-  <div class="container">
-    <h2 class="fw-bold text-center mb-4">Core Features</h2>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">📱 Monitor from anywhere (Wi-Fi / mobile data)</li>
-      <li class="list-group-item">🚨 Smart alerts for low gas levels or leakage</li>
-      <li class="list-group-item">💡 Displays gas percentage, weight, and days remaining</li>
-      <li class="list-group-item">🔋 Real-time sensor updates using IoT</li>
-      <li class="list-group-item">💯 100% original, never-before-seen household innovation</li>
-    </ul>
+
+
+  <!-- FEATURES -->
+  <section id="features" class="features container">
+    <h2 class="mb-4 center">Core Features</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <i class="fa-solid fa-mobile-screen fa-2x" style="color:var(--primary)"></i>
+        <h5>Monitor from Anywhere</h5>
+        <p>Access live gas level and history using your smartphone over Wi-Fi or cellular data.</p>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-bell fa-2x" style="color:var(--primary)"></i>
+        <h5>Smart Alerts</h5>
+        <p>Get notified locally in-app when your gas level drops or if a leak is detected.</p>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-chart-simple fa-2x" style="color:var(--primary)"></i>
+        <h5>Real-time Insights</h5>
+        <p>Visual gauge, weight estimate and days remaining — updated instantly when the sensor reports.</p>
+      </div>
+      <div class="feature">
+        <i class="fa-solid fa-shield-halved fa-2x" style="color:var(--primary)"></i>
+        <h5>Household Safety</h5>
+        <p>Leak detection technology and early low-gas alerts protect your family.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simple Setup Section -->
+<section class="setup-section">
+  <h2>Simple Setup, Powerful Results</h2>
+  <p class="setup-subtitle">Get up and running in three easy steps</p>
+
+  <div class="setup-steps">
+    <div class="setup-card">
+      <div class="setup-icon">
+        <i class="fa-solid fa-weight-scale"></i>
+      </div>
+      <h3>Position the Cylinder</h3>
+      <p>Place your gas cylinder on the CylinderSense weighing stand for an even weight distribution.</p>
+    </div>
+
+    <div class="setup-card">
+      <div class="setup-icon">
+        <i class="fa-solid fa-microchip"></i>
+      </div>
+      <h3>Connect the Brains</h3>
+      <p>Our smart system, powered by a robust microcontroller, connects seamlessly to the sensor.</p>
+    </div>
+
+    <div class="setup-card">
+      <div class="setup-icon">
+        <i class="fa-solid fa-wifi"></i>
+      </div>
+      <h3>View Your Data</h3>
+      <p>Monitor your gas levels instantly on the mobile app or a local display from anywhere.</p>
+    </div>
+  </div>
+
+  <div class="setup-footer">
+    <p>
+      Once set up, CylinderSense continuously monitors your gas levels with precision accuracy.
+      The system automatically calibrates using your cylinder’s tare weight and provides real-time updates
+      whenever you check your display or app.
+    </p>
   </div>
 </section>
 
-<!-- Footer -->
-<footer class="text-center py-3 bg-success text-white">
-    <!-- Download App Section -->
+
+ <!-- Download App Section -->
 <section class="download-app py-5 text-center bg-light">
   <div class="container">
-    <h2 class="fw-bold mb-3">Get the Gas Monitoring System  App</h2>
+    <h2 class="fw-bold mb-3">Get the SmartGas App</h2>
     <p class="mb-4">Monitor your gas levels on the go — download our mobile app now!</p>
     <div class="d-flex justify-content-center gap-3 flex-wrap">
       <a href="#" class="btn btn-dark d-flex align-items-center gap-2 px-3 py-2">
@@ -132,17 +156,28 @@
   </div>
 </section>
 
-  <p>&copy; 2025 SmartGas. All Rights Reserved.</p>
-  <p>Download the App: <a href="#" class="text-warning">Coming Soon</a></p>
-</footer>
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <footer class="footer">
+    <div class="container">
+      <small>© 2025 Gas Monitoring System. All rights reserved.</small>
+    </div>
+  </footer>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-  loginModal.show();
-});
+  // Fade-in on scroll animation
+  const fadeElements = document.querySelectorAll('.fade-in');
+
+  const appearOnScroll = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  fadeElements.forEach(el => appearOnScroll.observe(el));
 </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
