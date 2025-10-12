@@ -1,42 +1,61 @@
 import { db, collection, addDoc } from "./firebase.js";
 
-// Get form
-const orderForm = document.getElementById("orderForm");
+document.addEventListener("DOMContentLoaded", () => {
+  const quantityInput = document.getElementById("quantity");
+  const totalPriceEl = document.getElementById("totalPrice");
+  const unitPrice = 2499;
 
-orderForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
+  const increaseBtn = document.getElementById("increaseQty");
+  const decreaseBtn = document.getElementById("decreaseQty");
 
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const address = document.getElementById("address").value.trim();
-  const payment = document.getElementById("payment").value;
-
-  if (!name || !email || !phone || !address || !payment) {
-    alert("Please fill in all the details!");
-    return;
+  function updateTotal() {
+    let qty = parseInt(quantityInput.value);
+    if (qty < 10) qty = 10;
+    quantityInput.value = qty;
+    totalPriceEl.textContent = (qty * unitPrice).toLocaleString();
   }
 
-  try {
-    await addDoc(collection(db, "orders"), {
-      name,
-      email,
-      phone,
-      address,
-      payment,
-      product: "Smart Gas Monitoring System",
-      price: 2499,
-      timestamp: new Date().toISOString()
-    });
+  increaseBtn.addEventListener("click", () => {
+    quantityInput.value = parseInt(quantityInput.value) + 1;
+    updateTotal();
+  });
 
-    // ✅ Show success modal
-    const modal = new bootstrap.Modal(document.getElementById('orderSuccessModal'));
-    modal.show();
+  decreaseBtn.addEventListener("click", () => {
+    if (parseInt(quantityInput.value) > 10) {
+      quantityInput.value = parseInt(quantityInput.value) - 1;
+      updateTotal();
+    }
+  });
 
-    orderForm.reset();
+  quantityInput.addEventListener("input", updateTotal);
 
-  } catch (error) {
-    console.error("Error placing order: ", error);
-    alert("Something went wrong while placing your order!");
-  }
+  // Handle order submit
+  const orderForm = document.getElementById("orderForm");
+  orderForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const order = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      address: document.getElementById("address").value,
+      payment: document.getElementById("payment").value,
+      quantity: parseInt(quantityInput.value),
+      totalPrice: parseInt(quantityInput.value) * unitPrice,
+      timestamp: new Date(),
+    };
+
+    try {
+      await addDoc(collection(db, "orders"), order);
+      alert("✅ Order placed successfully!");
+      orderForm.reset();
+      quantityInput.value = 10;
+      updateTotal();
+    } catch (err) {
+      console.error("Error adding order: ", err);
+      alert("❌ Failed to place order. Try again!");
+    }
+  });
+
+  updateTotal();
 });
