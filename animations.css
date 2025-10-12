@@ -1,0 +1,22 @@
+/* animations.css - reusable transitions */
+.fade-in { animation: fadeIn .6s ease forwards; opacity:0; }
+.slide-up { animation: slideUp .6s cubic-bezier(.16,.84,.36,1) forwards; opacity:0; }
+
+@keyframes fadeIn {
+  to { opacity:1; transform: translateY(0); }
+  from { opacity:0; transform: translateY(6px); }
+}
+@keyframes slideUp {
+  to { opacity:1; transform: translateY(0); }
+  from { opacity:0; transform: translateY(18px); }
+}
+
+/* subtle pulse on CTA */
+.pulse {
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(30,144,255,0.16); }
+  70% { box-shadow: 0 0 0 12px rgba(30,144,255,0.02); }
+  100% { box-shadow: 0 0 0 0 rgba(30,144,255,0); }
+}
