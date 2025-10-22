@@ -2,11 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 :root{
-  --primary: #1e90ff;    /* DodgerBlue */
-  --primary-dark: #187bdb;
+  --primary: #2390fd;    /* DodgerBlue */
+  --primary-dark: #3579b9;
   --muted: #6b7280;
   --glass-bg: rgba(255,255,255,0.08);
-  --card-bg: rgba(255,255,255,0.06);
+  --card-bg: rgba(133, 110, 222, 0.06);
   --accent: #ffd54f;
 }
 
@@ -15,7 +15,7 @@ html,body{height:100%}
 body{
   font-family:'Poppins',sans-serif;
   margin:0;
-  background: linear-gradient(180deg,#eaf6ff 0%, #f7fbff 100%);
+  background: linear-gradient(100deg,#82bae5 20%, #f7fbff 100%);
   color:#0b2447;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
@@ -84,7 +84,7 @@ body{
 
 .display-card h3 {
   font-size: 1.2rem;
-  color: #1e90ff;
+  color: #1387fa;
   margin-bottom: 8px;
 }
 
@@ -119,12 +119,12 @@ body{
   justify-content:center;
   text-align:center;
   padding: 60px 16px;
-  background: radial-gradient(circle at 10% 20%, rgba(30,144,255,0.08), transparent 10%),
-              radial-gradient(circle at 90% 80%, rgba(24,123,219,0.06), transparent 10%);
+  background: radial-gradient(circle at 10% 20%, rgba(191, 192, 193, 0.08), transparent 10%),
+              radial-gradient(circle at 90% 80%, rgba(40, 139, 238, 0.06), transparent 10%);
 }
 .hero .inner { max-width:960px; padding:28px; border-radius:16px; background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.82)); box-shadow: 0 10px 30px rgba(10,30,70,0.06); }
-.hero h1 { margin:0; color:#063252; font-size:2.15rem; }
-.hero p { color: #23445b; margin-top:12px; font-size:1.05rem }
+.hero h1 { margin:0; color:#0e3f63; font-size:2.15rem; }
+.hero p { color: #152f43; margin-top:12px; font-size:1.05rem }
 
 /* Feature cards */
 .features { padding: 48px 16px; }
@@ -133,18 +133,18 @@ body{
   background: var(--card-bg);
   border-radius:14px;
   padding:22px;
-  color:#04233a;
-  box-shadow: 0 6px 20px rgba(6,21,47,0.06);
+  color:#041e32;
+  box-shadow: 0 6px 20px rgba(8, 24, 51, 0.06);
   transition: transform .28s ease, box-shadow .28s ease;
 
 }
-.feature:hover { transform: translateY(-8px); box-shadow: 0 14px 40px rgba(6,21,47,0.12); }
+.feature:hover { transform: translateY(-8px); box-shadow: 0 14px 40px rgba(15, 53, 119, 0.12); }
 .feature h5 { margin:12px 0 8px 0; font-size:1.05rem; }
 .feature p { color:var(--muted); font-size:0.95rem; }
 
 /* Product / order page shared */
 .container-card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,250,250,0.95));
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(150, 161, 191, 0.95));
   border-radius:14px;
   padding:20px;
   box-shadow: 0 10px 30px rgba(10,30,70,0.06);
@@ -276,4 +276,4 @@ body{
 
 .download-app i {
   font-size: 1rem;
-}
+} 
