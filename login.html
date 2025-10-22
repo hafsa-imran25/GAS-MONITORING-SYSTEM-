@@ -5,44 +5,335 @@
   <title>Login — SmartGas</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <script type="module" src="login.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://kit.fontawesome.com/a2e0e6ad85.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(100deg,#82bae5 20%, #f7fbff 100%);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background: linear-gradient(90deg, rgba(30,144,255,0.95), rgba(24,123,219,0.95));
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 8px 30px rgba(2,6,23,0.08);
+    }
+
+    .navbar .navbar-brand { font-weight:700; color:#fff; }
+    .navbar .nav-link{ color: rgba(255,255,255,0.95); }
+    .navbar .nav-link:hover{ color: #fff; text-decoration: underline; }
+
+    .container-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 40px;
+      text-align: center;
+      max-width: 400px;
+      margin: auto;
+      margin-top: 80px;
+    }
+
+    .form-control {
+      border-radius: 12px;
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 69%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #888;
+    }
+
+    .btn-primary {
+      background-color: dodgerblue;
+      border: none;
+      border-radius: 12px;
+      padding: 10px;
+      transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+      background-color: #1e40af;
+    }
+
+    .forgot, .signup-link {
+      display: block;
+      margin-top: 10px;
+      color: #1e40af;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .forgot:hover, .signup-link:hover {
+      text-decoration: underline;
+    }
+
+    .strength {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 5px;
+    }
+
+    .strength.weak { color: red; }
+    .strength.medium { color: orange; }
+    .strength.strong { color: green; }
+
+    footer.footer {
+      text-align: center;
+      padding: 15px;
+      background: #7da9d5;
+      margin-top: auto;
+    }
+
+    #toast {
+      visibility: hidden;
+      min-width: 250px;
+      background-color: #1e3a8a;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 15px;
+      position: fixed;
+      z-index: 1;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      font-size: 16px;
+    }
+    #toast.show {
+      visibility: visible;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    @keyframes fadein {
+      from {bottom: 0; opacity: 0;}
+      to {bottom: 30px; opacity: 1;}
+    }
+    @keyframes fadeout {
+      from {bottom: 30px; opacity: 1;}
+      to {bottom: 0; opacity: 0;}
+    }
+  </style>
 </head>
+
 <body>
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg">
     <div class="container">
-      <a class="navbar-brand" href="index.html"><i class="fa-solid fa-gas-pump"></i> Gas Monitoring System</a>
+      <a class="navbar-brand" href="index.html"><i class="fa-solid fa-microchip"></i> <b>SmartGas System</b></a>
       <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        </ul>
-      </div>
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li></ul></div>
     </div>
   </nav>
 
-  <main class="container my-5">
-    <div class="container-card mx-auto shadow p-4 rounded" style="max-width:460px;background:white;">
-      <h3 class="mb-3 text-center">Login</h3>
-      <form id="loginForm">
-        <div class="mb-3">
+  <!-- Login Form -->
+  <main class="container">
+    <div class="container-card" id="loginCard">
+      <i class="fa-solid fa-house fs-1 text-primary mb-3"></i>
+      <h3>Login</h3>
+      <form id="loginForm" class="mt-3">
+        <div class="mb-3 text-start">
           <label class="form-label">Email</label>
           <input id="lemail" type="email" class="form-control" required>
         </div>
-        <div class="mb-3">
-          <label class="form-label">Phone Number</label>
-          <input id="lphone" type="tel" class="form-control" pattern="[0-9]{10}" maxlength="10" required>
+        <div class="mb-3 text-start password-wrapper">
+          <label class="form-label">Password</label>
+          <input id="lpassword" type="password" class="form-control" required>
+          <i class="fa-solid fa-eye toggle-password" id="toggleLoginPwd"></i>
         </div>
         <div class="d-grid">
-          <button class="btn btn-primary" type="submit">Continue</button>
+          <button type="submit" class="btn btn-primary">Log In</button>
         </div>
       </form>
+      <a href="#" id="forgotPassword" class="forgot">Forgot password?</a>
+      <a href="#" id="showSignup" class="signup-link">Don’t have an account? Sign Up</a>
+    </div>
+
+    <!-- Signup Form -->
+    <div class="container-card" id="signupCard" style="display:none;">
+      <i class="fa-solid fa-user-plus fs-1 text-primary mb-3"></i>
+      <h3>Sign Up</h3>
+      <form id="signupForm" class="mt-3">
+        <div class="mb-3 text-start">
+          <label class="form-label">Email</label>
+          <input id="semail" type="email" class="form-control" required>
+        </div>
+        <div class="mb-3 text-start password-wrapper">
+          <label class="form-label">Password</label>
+          <input id="spassword" type="password" class="form-control" required>
+          <i class="fa-solid fa-eye toggle-password" id="toggleSignupPwd"></i>
+          <div id="strengthMessage" class="strength"></div>
+          <div id="suggestion" class="text-muted small"></div>
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Create Account</button>
+        </div>
+      </form>
+      <a href="#" id="showLogin" class="signup-link">Already have an account? Log In</a>
     </div>
   </main>
 
-  <footer class="footer text-center py-3 bg-light">
-    <small>© 2025 Gas Monitoring System</small>
+  <footer class="footer">
+    <small>© 2025 SmartGas System</small>
   </footer>
 
-  <script src="https://kit.fontawesome.com/a2e0e6ad85.js" crossorigin="anonymous"></script>
+  <div id="toast"></div>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+    import { 
+      getAuth, 
+      signInWithEmailAndPassword, 
+      sendPasswordResetEmail,
+      createUserWithEmailAndPassword
+    } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+    import { 
+      getFirestore, 
+      collection, 
+      addDoc, 
+      serverTimestamp 
+    } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC-YKhMYK3GdknDo4rjD0ksmdlWNX6ESo8",
+      authDomain: "gas-management-system-f4344.firebaseapp.com",
+      projectId: "gas-management-system-f4344",
+      storageBucket: "gas-management-system-f4344.firebasestorage.app",
+      messagingSenderId: "511571836469",
+      appId: "1:511571836469:web:91aca14dc4c99d4c51fb7c",
+      measurementId: "G-CHTZ3F8BXR"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Toast
+    function showToast(message, isError = false) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.style.backgroundColor = isError ? "#e11d48" : "#1e3a8a";
+      toast.className = "show";
+      setTimeout(() => toast.className = toast.className.replace("show", ""), 3000);
+    }
+
+    // Toggle between login/signup
+    document.getElementById("showSignup").addEventListener("click", () => {
+      document.getElementById("loginCard").style.display = "none";
+      document.getElementById("signupCard").style.display = "block";
+    });
+    document.getElementById("showLogin").addEventListener("click", () => {
+      document.getElementById("signupCard").style.display = "none";
+      document.getElementById("loginCard").style.display = "block";
+    });
+
+    // Toggle password visibility
+    const toggleLogin = document.getElementById("toggleLoginPwd");
+    const loginPwd = document.getElementById("lpassword");
+    toggleLogin.addEventListener("click", () => {
+      const type = loginPwd.type === "password" ? "text" : "password";
+      loginPwd.type = type;
+      toggleLogin.classList.toggle("fa-eye-slash");
+    });
+
+    const toggleSignup = document.getElementById("toggleSignupPwd");
+    const signupPwd = document.getElementById("spassword");
+    toggleSignup.addEventListener("click", () => {
+      const type = signupPwd.type === "password" ? "text" : "password";
+      signupPwd.type = type;
+      toggleSignup.classList.toggle("fa-eye-slash");
+    });
+
+    // Password strength checker
+    const strengthMsg = document.getElementById("strengthMessage");
+    const suggestion = document.getElementById("suggestion");
+    signupPwd.addEventListener("input", () => {
+      const pwd = signupPwd.value;
+      let strength = 0;
+      if (pwd.length >= 8) strength++;
+      if (/[A-Z]/.test(pwd)) strength++;
+      if (/[0-9]/.test(pwd)) strength++;
+      if (/[^A-Za-z0-9]/.test(pwd)) strength++;
+
+      if (strength <= 1) {
+        strengthMsg.textContent = "Weak Password";
+        strengthMsg.className = "strength weak";
+        suggestion.textContent = "Use at least 8 chars, mix letters, numbers, symbols.";
+      } else if (strength === 2 || strength === 3) {
+        strengthMsg.textContent = "Medium Strength";
+        strengthMsg.className = "strength medium";
+        suggestion.textContent = "Add symbols or uppercase letters to strengthen.";
+      } else {
+        strengthMsg.textContent = "Strong Password 💪";
+        strengthMsg.className = "strength strong";
+        suggestion.textContent = "";
+      }
+    });
+
+    // Login
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("lemail").value.trim();
+      const password = document.getElementById("lpassword").value.trim();
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        await addDoc(collection(db, "user_logins"), { email, time: serverTimestamp() });
+        showToast("✅ Login successful!");
+        setTimeout(() => window.location.href = "index.html", 2000);
+      } catch (error) {
+        showToast(error.message, true);
+      }
+    });
+
+    // Signup
+    document.getElementById("signupForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("semail").value.trim();
+      const password = document.getElementById("spassword").value.trim();
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await addDoc(collection(db, "users"), {
+          email,
+          createdAt: serverTimestamp()
+        });
+        showToast("🎉 Account created successfully!");
+        setTimeout(() => {
+          document.getElementById("signupCard").style.display = "none";
+          document.getElementById("loginCard").style.display = "block";
+        }, 1500);
+      } catch (error) {
+        showToast(error.message, true);
+      }
+    });
+
+    // Forgot password
+    document.getElementById("forgotPassword").addEventListener("click", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("lemail").value.trim();
+      if (!email) {
+        showToast("Enter your email to reset password.", true);
+        return;
+      }
+      try {
+        await sendPasswordResetEmail(auth, email);
+        showToast("📩 Password reset link sent!");
+      } catch (error) {
+        showToast(error.message, true);
+      }
+    });
+  </script>
 </body>
 </html>
