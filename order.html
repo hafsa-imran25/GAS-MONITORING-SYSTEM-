@@ -1,17 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order - Gas Monitoring System</title>
-  <link rel="stylesheet" href="order.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <script type="module" src="order.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartGas Order</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f7faff;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: dodgerblue;
+      color: white;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header .logo {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    header nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+
+    header nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    header nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .login-btn {
+      background: white;
+      color: dodgerblue !important;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .order-section {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 60px 20px;
+    }
+
+    .order-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      display: flex;
+      gap: 30px;
+      padding: 30px;
+      max-width: 1100px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .product-img img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 12px;
+      object-fit: cover;
+      transition: 0.3s ease-in-out;
+    }
+
+    .product-img img:hover {
+      transform: scale(1.03);
+    }
+
+    .product-details {
+      flex: 2;
+      animation: fadeIn 1s ease;
+    }
+
+    .product-details h2 {
+      color: #222;
+      font-size: 1.8rem;
+    }
+
+    .product-details p {
+      color: #555;
+    }
+
+    .price {
+      color: dodgerblue;
+      font-weight: 600;
+    }
+
+    .total {
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .quantity-box {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .qty-btn {
+      background: dodgerblue;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      cursor: pointer;
+    }
+
+    .qty-btn:hover {
+      background: #0073e6;
+    }
+
+    #quantity {
+      width: 60px;
+      border: none;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    input,
+    textarea,
+    select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: 0.3s;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: dodgerblue;
+      box-shadow: 0 0 6px rgba(30, 144, 255, 0.3);
+    }
+
+    button.order-btn {
+      background-color: dodgerblue;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button.order-btn:hover {
+      background-color: #0073e6;
+      transform: scale(1.03);
+    }
+
+    footer {
+      background: #e8f3ff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+
+    /* Confirmation Page */
+    .confirmation {
+      display: none;
+      text-align: center;
+      margin-top: 80px;
+      animation: fadeInUp 1.2s ease;
+      position: relative;
+    }
+
+    .confirmation.active {
+      display: block;
+    }
+
+    .confirmation i {
+      color: dodgerblue;
+      font-size: 80px;
+      animation: bounce 1.5s infinite;
+    }
+
+    .confirmation h2 {
+      margin-top: 20px;
+      color: #222;
+      font-size: 1.8rem;
+    }
+
+    .confirmation img {
+      width: 200px;
+      margin: 20px auto;
+      display: block;
+      border-radius: 15px;
+    }
+
+    .confirmation p {
+      color: #555;
+      font-size: 1rem;
+      margin: 10px auto;
+      max-width: 500px;
+    }
+
+    .ok-btn {
+      background: dodgerblue;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .ok-btn:hover {
+      background: #0073e6;
+    }
+
+    /* Confetti */
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: hsl(var(--hue), 100%, 60%);
+      top: 0;
+      left: 50%;
+      opacity: 0;
+      animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(600px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .order-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .product-img img {
+        max-width: 280px;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="logo">Gas Monitoring System</div>
+  <header>
+    <div class="logo"><i class="fa-solid fa-microchip"></i> SmartGas System</div>
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -20,57 +332,167 @@
     </nav>
   </header>
 
-  <!-- ORDER SECTION -->
-  <section class="order-section">
+  <section class="order-section" id="orderSection">
     <div class="order-card">
       <div class="product-img">
-        <img src="images/gas_device.jpg" alt="Gas Monitoring Device">
+        <img src="https://cdn-icons-png.flaticon.com/512/2947/2947635.png" alt="Gas Cylinder" />
       </div>
       <div class="product-details">
-        <h2>Smart Gas Monitoring System</h2>
-        <p>Monitor your LPG cylinder in real-time from anywhere with smart alerts for leakage, low gas, and usage analytics.</p>
+        <h2>Smart Gas Monitoring Device</h2>
+        <p>Monitor your LPG cylinder in real-time with instant alerts for leaks, refills, and low levels.</p>
         <h3 class="price">₹<span id="unitPrice">2499</span></h3>
-
-        <!-- Quantity -->
         <div class="quantity-control">
-          <label for="quantity">Quantity:</label>
+          <label>Quantity:</label>
           <div class="quantity-box">
             <button id="decreaseQty" class="qty-btn">-</button>
-            <input type="number" id="quantity" min="10" value="10">
+            <input type="number" id="quantity" value="10" min="10" />
             <button id="increaseQty" class="qty-btn">+</button>
           </div>
         </div>
-
         <h3 class="total">Total: ₹<span id="totalPrice">24990</span></h3>
 
-        <!-- Order Form -->
         <form id="orderForm">
-          <label for="name">Full Name:</label>
-          <input type="text" id="name" placeholder="Enter your full name" required>
-
-          <label for="email">Email:</label>
-          <input type="email" id="email" placeholder="Enter your email" required>
-
-          <label for="phone">Phone Number:</label>
-          <input type="tel" id="phone" placeholder="Enter your phone number" required>
-
-          <label for="address">Address:</label>
-          <textarea id="address" placeholder="Enter your address" required></textarea>
-
-          <label for="payment">Payment Method:</label>
+          <label>Full Name:</label>
+          <input type="text" id="name" required placeholder="Enter full name" />
+          <label>Email:</label>
+          <input type="email" id="email" required placeholder="Enter email" />
+          <label>Phone:</label>
+          <input type="tel" id="phone" required placeholder="Enter phone number" />
+          <label>Address:</label>
+          <textarea id="address" required placeholder="Enter delivery address"></textarea>
+          <label>Payment Method:</label>
           <select id="payment" required>
             <option value="COD">Cash on Delivery</option>
-            <option value="UPI">UPI</option>
+            <option value="Paytm">Paytm</option>
+            <option value="GPay">Google Pay</option>
+            <option value="PhonePe">PhonePe</option>
           </select>
-
-          <button type="submit" class="order-btn">Place Order</button>
+          <button type="submit" class="order-btn"><i class="fa-solid fa-cart-shopping"></i> Place Order</button>
         </form>
       </div>
     </div>
   </section>
 
-  <footer class="footer">
-    <p>© 2025 Gas Monitoring System | All Rights Reserved</p>
-  </footer>
+  <section class="confirmation" id="confirmation">
+    <i class="fa-solid fa-circle-check"></i>
+    <h2>Order Confirmed!</h2>
+    <img src="https://cdn-icons-png.flaticon.com/512/2947/2947635.png" alt="Gas Cylinder" />
+    <p id="confirmDetails"></p>
+    <button class="ok-btn" onclick="location.reload()">OK</button>
+  </section>
+
+  <footer>© 2025 SmartGas System | All Rights Reserved</footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC-YKhMYK3GdknDo4rjD0ksmdlWNX6ESo8",
+      authDomain: "gas-management-system-f4344.firebaseapp.com",
+      projectId: "gas-management-system-f4344",
+      storageBucket: "gas-management-system-f4344.firebasestorage.app",
+      messagingSenderId: "511571836469",
+      appId: "1:511571836469:web:91aca14dc4c99d4c51fb7c",
+      measurementId: "G-CHTZ3F8BXR",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const quantityInput = document.getElementById("quantity");
+    const totalPriceEl = document.getElementById("totalPrice");
+    const unitPrice = 2499;
+
+    function updateTotal() {
+      let qty = parseInt(quantityInput.value);
+      if (qty < 10) qty = 10;
+      totalPriceEl.textContent = (qty * unitPrice).toLocaleString();
+    }
+
+    document.getElementById("increaseQty").addEventListener("click", () => {
+      quantityInput.value = parseInt(quantityInput.value) + 1;
+      updateTotal();
+    });
+    document.getElementById("decreaseQty").addEventListener("click", () => {
+      if (parseInt(quantityInput.value) > 10) {
+        quantityInput.value = parseInt(quantityInput.value) - 1;
+        updateTotal();
+      }
+    });
+
+    document.getElementById("orderForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const order = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        address: document.getElementById("address").value,
+        payment: document.getElementById("payment").value,
+        quantity: parseInt(quantityInput.value),
+        total: parseInt(quantityInput.value) * unitPrice,
+        timestamp: serverTimestamp(),
+      };
+
+      try {
+        await addDoc(collection(db, "orders"), order);
+
+        Swal.fire({
+          icon: "success",
+          title: "Order Placed!",
+          text: "Your order has been confirmed successfully!",
+          background: "dodgerblue",
+          color: "#fff",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          backdrop: 'rgba(0,0,0,0.6)',
+        });
+
+        setTimeout(() => {
+          document.getElementById("orderSection").style.display = "none";
+          const confirm = document.getElementById("confirmation");
+          confirm.classList.add("active");
+          document.getElementById("confirmDetails").innerHTML = `
+            <b>Name:</b> ${order.name}<br>
+            <b>Email:</b> ${order.email}<br>
+            <b>Phone:</b> ${order.phone}<br>
+            <b>Address:</b> ${order.address}<br>
+            <b>Quantity:</b> ${order.quantity}<br>
+            <b>Payment:</b> ${order.payment}<br>
+            <b>Total:</b> ₹${order.total.toLocaleString()}
+          `;
+          startConfetti();
+        }, 3000);
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Something went wrong. Please try again later.",
+          background: "dodgerblue",
+          color: "#fff",
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      }
+    });
+
+    function startConfetti() {
+      const confettiCount = 50;
+      const confirm = document.getElementById("confirmation");
+
+      for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = Math.random() * 100 + "%";
+        confetti.style.setProperty("--hue", Math.floor(Math.random() * 360));
+        confetti.style.animationDelay = Math.random() * 2 + "s";
+        confirm.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 3000);
+      }
+    }
+  </script>
 </body>
 </html>
